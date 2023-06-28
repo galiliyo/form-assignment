@@ -1,22 +1,21 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
 
-import { AppComponent } from './app.component';
-import { FormContainerComponent } from './form-container/form-container.component';
-import { FormStep1Component } from './form-container/form-step1/form-step1.component';
-import { FormStep2Component } from './form-container/form-step2/form-step2.component';
+import { AppComponent } from './app.component'
+import { FormContainerComponent } from './form-container/form-container.component'
+import { FormStep1Component } from './form-container/form-step1/form-step1.component'
+import { FormStep2Component } from './form-container/form-step2/form-step2.component'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
     FormContainerComponent,
     FormStep1Component,
-    FormStep2Component
+    FormStep2Component,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

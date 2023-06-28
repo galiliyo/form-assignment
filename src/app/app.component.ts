@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-root',
@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'form-assignment';
+  title = 'form-assignment'
 
-  stepNo: number = 1;
+  stepNo: number = 1
 
   ngOnInit() {}
 
   goToStep(step: number) {
-    console.log('step', step);
-    this.stepNo = step;
+    console.log('step', step)
+    this.stepNo = step
   }
 }

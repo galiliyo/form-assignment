@@ -1,9 +1,14 @@
-<div class="form-container">
+<div class='form-container'>
   <h3>Step {{stepNo}}</h3>
-  <div class="content">
+  <div class='content'>
     <ng-content></ng-content>
   </div>
-  <div class="controls">
-    <button (click)="nextBtnClicked()" class="btn btn-primary">Next</button>
-  </div>
+  <!--  <div class='controls'>-->
+  <!--    <button (click)='prevBtnClicked()'-->
+  <!--            *ngIf='stepNo===2'-->
+  <!--            class='btn btn-outline'-->
+  <!--            style='margin: 0 1rem'>Previous-->
+  <!--    </button>-->
+  <!--    <button (click)='nextBtnClicked()' [disabled]='!f.valid' ] class='btn btn-primary'>Next</button>-->
+  <!--  </div>-->
 </div>
