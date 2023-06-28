@@ -1,5 +1,11 @@
 <div class="app-container">
-<app-form-container>
-  form content
-</app-form-container>
+  <app-form-container (onSetStep)=goToStep($event)
+                      [stepNo]="stepNo">
+
+    <div [ngSwitch]="stepNo">
+      <app-form-step1 *ngSwitchCase="1"></app-form-step1>
+      <app-form-step2 *ngSwitchCase="2"></app-form-step2>
+      <div *ngSwitchDefault>Some Error has occurred</div>
+    </div>
+  </app-form-container>
 </div>
