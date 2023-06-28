@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core"
 import { IFormData } from "./interfaces/FormData.interface"
+import { FormDataServiceService } from "./services/form-data-service.service"
 
 @Component({
   selector: "app-root",
@@ -8,22 +9,26 @@ import { IFormData } from "./interfaces/FormData.interface"
 })
 export class AppComponent implements OnInit {
   title = "form-assignment"
+  stepNo: number = 1
 
-  stepNo: number = 2
+  constructor(private formDataService: FormDataServiceService) {}
 
   ngOnInit() {}
 
   goToStep(step: number) {
-    console.log("step", step)
     this.stepNo = step
   }
 
-  submitForm($event: Partial<IFormData>) {
-    console.log("submitForm", $event)
+  submitForm(stepFormData: Partial<IFormData>) {
+    this.formDataService.setFormData(stepFormData)
+    console.log(
+      "this.formDataService.getFormData()",
+      this.formDataService.getFormData()
+    )
   }
 
   nextStep(stepFormData: Partial<IFormData>) {
-    console.log("nextStep", stepFormData)
+    this.formDataService.setFormData(stepFormData)
     this.stepNo++
   }
 }

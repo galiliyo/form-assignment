@@ -18,13 +18,10 @@ export class FormStep_2_Component {
     noOfEmp: 1,
   }
 
-  submitForm() {
+  onSubmitClicked() {
     this.step_2_data.companyName = this.form2.value.step_2_data.companyName
     this.step_2_data.domainName = this.form2.value.step_2_data.domainName
     this.step_2_data.noOfEmp = this.form2.value.step_2_data.noOfEmp
-  }
-
-  onSubmitClicked() {
     this.onSubmit.emit(this.step_2_data)
   }
 

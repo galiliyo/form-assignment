@@ -2,7 +2,7 @@ export interface IFormData {
   firstName: string
   lastName: string
   email: string
-  age: number
+  age: number | undefined
   companyName: string
   domainName?: string | undefined
   noOfEmp: number
