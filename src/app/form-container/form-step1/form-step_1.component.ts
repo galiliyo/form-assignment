@@ -1,13 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core"
-import { NgForm, NgModel } from "@angular/forms"
+import { Component, EventEmitter, OnInit, Output } from "@angular/core"
+import { FormBuilder, Validators } from "@angular/forms"
 import { IFormData } from "../../interfaces/FormData.interface"
-import { FormDataServiceService } from "../../services/form-data-service.service"
+import { FormDataService } from "../../services/form-data.service"
 
 @Component({
   selector: "app-form-step_1",
@@ -15,43 +9,54 @@ import { FormDataServiceService } from "../../services/form-data-service.service
   styleUrls: ["./form-step_1.component.scss"],
 })
 export class FormStep_1_Component implements OnInit {
-  @ViewChild("f", { static: false }) form_1: NgForm
   @Output() onNext = new EventEmitter<Partial<IFormData>>()
 
-  step_1_data: Partial<IFormData> = {
+  step_1_data: Omit<IFormData, "noOfEmp" | "companyName" | "domainName"> = {
     firstName: "",
     lastName: "",
     email: "",
-    age: undefined,
+    age: null,
   }
   allowedAge = { min: 18, max: 99 }
+  form = this.fb.group({
+    firstName: ["", Validators.required],
+    lastName: ["", Validators.required],
+    email: ["", [Validators.required, Validators.email]],
+    age: [
+      "",
+      [
+        Validators.required,
+        Validators.min(this.allowedAge.min),
+        Validators.max(this.allowedAge.max),
+      ],
+    ],
+  })
 
-  constructor(private formDataService: FormDataServiceService) {}
+  constructor(
+    private fb: FormBuilder,
+    private formDataService: FormDataService
+  ) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit", this.formDataService.getFormData())
-    setTimeout(() => {
-      this.form_1.setValue({
-        step_1_data: { ...this.formDataService.getFormData() },
-      })
-      this.form_1.va
-    }, 0)
-    // this.form_1.updateValueAndValidity()
+  ngOnInit() {
+    const formData = this.formDataService.getFormData()
+    this.form.setValue({
+      firstName: formData?.firstName || "",
+      lastName: formData?.lastName || "",
+      email: formData?.email || "",
+      age: formData?.age ? String(formData.age) : "",
+    })
   }
 
   nextBtnClicked() {
-    this.step_1_data.firstName = this.form_1.value.step_1_data.firstName
-    this.step_1_data.lastName = this.form_1.value.step_1_data.lastName
-    this.step_1_data.email = this.form_1.value.step_1_data.email
-    this.step_1_data.age = this.form_1.value.step_1_data.age
-      ? +this.form_1.value.step_1_data.age
-      : undefined
+    const { firstName, lastName, age, email } = this.form.value
+    this.step_1_data.firstName = String(firstName)
+    this.step_1_data.lastName = String(lastName)
+    this.step_1_data.email = String(email)
+    this.step_1_data.age = +String(age)
     this.onNext.emit(this.step_1_data)
   }
 
-  showErrorHint(ref: NgModel) {
-    return ref.invalid && (ref.dirty || ref.touched)
+  showErrorHint(fc: any) {
+    return fc.invalid && (fc.dirty || fc.touched)
   }
 }

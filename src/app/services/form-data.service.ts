@@ -1,18 +1,25 @@
-import { Injectable } from "@angular/core"
+import { Injectable, OnInit } from "@angular/core"
 import { IFormData } from "../interfaces/FormData.interface"
 
 @Injectable({
   providedIn: "root",
 })
-export class FormDataServiceService {
-  private _formData: IFormData = {
+export class FormDataService implements OnInit {
+  private _formData: IFormData
+  private emptyFormData: IFormData = {
     firstName: "",
     lastName: "",
     email: "",
-    age: undefined,
+    age: null,
     companyName: "",
     domainName: "",
-    noOfEmp: undefined,
+    noOfEmp: null,
+  }
+
+  constructor() {}
+
+  ngOnInit() {
+    this._formData = this.emptyFormData
   }
 
   getFormData() {
@@ -21,5 +28,9 @@ export class FormDataServiceService {
 
   setFormData(formData: Partial<IFormData>) {
     this._formData = { ...this._formData, ...formData }
+  }
+
+  resetFormData() {
+    this._formData = this.emptyFormData
   }
 }

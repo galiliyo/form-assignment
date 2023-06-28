@@ -1,6 +1,7 @@
-import { Directive, Input, OnInit } from "@angular/core"
-import { FormControl, NG_VALIDATORS, Validator } from "@angular/forms"
+import { Directive, Input, OnInit } from '@angular/core'
+import { FormControl, NG_VALIDATORS, Validator } from '@angular/forms'
 
+/// Custom validator for template based forms - ended up not using this
 @Directive({
   selector: "[appRangeValidator]",
   providers: [

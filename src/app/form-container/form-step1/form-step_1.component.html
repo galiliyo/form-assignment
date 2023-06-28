@@ -1,65 +1,65 @@
-<form #f='ngForm' (ngSubmit)='nextBtnClicked()'>
+<form (ngSubmit)='nextBtnClicked()' [formGroup]='form'>
   <div
-    #userData='ngModelGroup'
     class='form-container'
-    id='step_1_data'
-    ngModelGroup='step_1_data'>
+    id='step_1_data'>
     <div class='form-group'>
       <label for='firstName'>First Name</label>
       <input
-        #firstName='ngModel'
         class='form-control'
+        formControlName='firstName'
         id='firstName'
         name='firstName'
-        ngModel
-        required
         type='text'>
-      <div *ngIf='showErrorHint(firstName)' class='help'>Required</div>
+      <div *ngIf='showErrorHint(form.controls.firstName)'>
+        <div *ngIf='form.controls.firstName.errors?.["required"]' class='help'>Required</div>
+      </div>
     </div>
     <div class='form-group'>
       <label for='lastName'>Last Name</label>
       <input
-        #lastName='ngModel'
         class='form-control'
+        formControlName='lastName'
         id='lastName'
         name='lastName'
-        ngModel
-        required
         type='text'>
-      <div *ngIf='showErrorHint(lastName)' class='help'>Required</div>
+      <div
+        *ngIf='showErrorHint(form.controls.lastName)'>
+        <div *ngIf='form.controls.lastName.errors?.["required"]' class='help'>Required</div>
+      </div>
     </div>
     <div class='form-group'>
-      <label for='lastName'>Email</label>
+      <label for='email'>Email</label>
       <input
-        #email='ngModel'
         class='form-control'
-        email
+        formControlName='email'
         id='email'
         name='email'
-        ngModel
-        required
         type='email'>
-      <div *ngIf='showErrorHint(email)' class='help'>Email not valid</div>
+      <div
+        *ngIf='showErrorHint(form.controls.email)'>
+        <div *ngIf='form.controls.email.errors?.["required"]' class='help'>Required</div>
+        <div *ngIf='form.controls.email.errors?.["email"]' class='help'>Invalid Email</div>
+      </div>
     </div>
     <div class='form-group'>
-      <label for='lastName'>Age</label>
+      <label for='age'>Age</label>
       <input
-        #age='ngModel'
-        [allowedRange]='{min:allowedAge.min, max:allowedAge.max}'
-        [min]='1'
-        appRangeValidator
         class='form-control'
+        formControlName='age'
         id='age'
+        min='1'
         name='age'
-        ngModel
-        required
         type='number'>
-      <div *ngIf='showErrorHint(age)' class='help'>Must be between {{allowedAge.min}}-{{ allowedAge.max}}</div>
+      <div
+        *ngIf='showErrorHint(form.controls.age)'>
+        <div *ngIf='form.controls.age.errors?.["required"]' class='help'>Required</div>
+        <div *ngIf='form.controls.age.errors?.["min"]' class='help'>Min. age is {{allowedAge.min}}</div>
+        <div *ngIf='form.controls.age.errors?.["max"]' class='help'>Max. age is {{allowedAge.max}}</div>
+      </div>
     </div>
   </div>
-  <app-controls (onNext)='nextBtnClicked()'
-                [disabledNextBtn]='!f.valid'
-                nextLabel='Next'></app-controls>
+  <app-form-buttons (onNext)='nextBtnClicked()'
+                    [disabledNextBtn]='!form.valid'
+                    nextLabel='Next'></app-form-buttons>
 
-  <!--  {{JSON.stringify(f.value)}}-->
 </form>
