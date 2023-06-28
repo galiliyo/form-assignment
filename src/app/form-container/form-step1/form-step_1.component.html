@@ -1,12 +1,12 @@
 <form #f='ngForm' (ngSubmit)='onSubmit()'>
   <div
     #userData='ngModelGroup'
+    class='form-container'
     id='step_1_data'
     ngModelGroup='step_1_data'>
     <div class='form-group'>
       <label for='firstName'>First Name</label>
       <input
-
         #firstName='ngModel'
         class='form-control'
         id='firstName'
@@ -45,18 +45,21 @@
       <label for='lastName'>Age</label>
       <input
         #age='ngModel'
+        [allowedRange]='{min:allowedAge.min, max:allowedAge.max}'
+        [min]='1'
+        appRangeValidator
         class='form-control'
         id='age'
         name='age'
         ngModel
         required
         type='number'>
-      <div *ngIf='showErrorHint(age)' class='help'>Age not valid</div>
+      <div *ngIf='showErrorHint(age)' class='help'>Must be between {{allowedAge.min}}-{{ allowedAge.max}}</div>
     </div>
   </div>
-  <div class='controls'>
-    <button (click)='nextBtnClicked()' [disabled]='!f.valid' class='btn btn-primary'>Next</button>
-  </div>
-  {{JSON.stringify(email.valid)}}
-  {{JSON.stringify(f.value)}}
+  <app-controls (onNext)='nextBtnClicked()'
+                [disabledNextBtn]='!f.valid'
+                nextLabel='Next'></app-controls>
+
+  <!--  {{JSON.stringify(f.value)}}-->
 </form>
