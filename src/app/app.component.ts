@@ -1,19 +1,51 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from "@angular/core";
+import { IFormData } from "./interfaces/FormData.interface";
+import { FormDataService } from "./services/form-data.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = 'form-assignment'
+	title = "form-assignment";
+	stepNo: number = 1;
+	formData: IFormData;
+	protected readonly JSON = JSON;
 
-  stepNo: number = 1
+	constructor(private formDataService: FormDataService) {}
 
-  ngOnInit() {}
+	ngOnInit() {
+		const formData = localStorage.getItem("formData");
+		if (formData) {
+			this.formDataService.setFormData(JSON.parse(formData));
+		}
+	}
 
-  goToStep(step: number) {
-    console.log('step', step)
-    this.stepNo = step
-  }
+	goToStep(step: number) {
+		this.stepNo = step;
+	}
+
+	submitForm(stepFormData: Partial<IFormData>) {
+		this.formDataService.setFormData(stepFormData);
+		this.formData = this.formDataService.getFormData();
+		console.log(
+			"********************* Form Was Submitted *****************",
+			this.formData
+		);
+		this.formDataService.resetFormData();
+		this.stepNo++;
+	}
+
+	nextStep(stepFormData: Partial<IFormData>) {
+		this.formDataService.setFormData(stepFormData);
+		this.stepNo++;
+	}
+
+	prevStep() {
+		if (this.stepNo === 1) {
+			return;
+		}
+		this.stepNo--;
+	}
 }
