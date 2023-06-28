@@ -3,9 +3,9 @@ import { BrowserModule } from "@angular/platform-browser"
 
 import { AppComponent } from "./app.component"
 import { FormContainerComponent } from "./form-container/form-container.component"
-import { FormsModule } from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { RangeValidatorDirective } from "./custom-validators/range.directive"
-import { FormButtonsComponent } from "./form-container/controls/form-buttons.component"
+import { FormButtonsComponent } from "./form-container/form-buttons/form-buttons.component"
 import { FormStep_2_Component } from "./form-container/form-step2/form-step_2.component"
 import { FormStep_1_Component } from "./form-container/form-step1/form-step_1.component"
 
@@ -18,7 +18,7 @@ import { FormStep_1_Component } from "./form-container/form-step1/form-step_1.co
     RangeValidatorDirective,
     FormButtonsComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

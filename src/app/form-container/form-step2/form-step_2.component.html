@@ -1,50 +1,47 @@
-<form #f='ngForm' (ngSubmit)='onSubmitClicked()'>
+<form (ngSubmit)='onSubmitClicked()' [formGroup]='form'>
   <div
-    #userData='ngModelGroup'
     class='form-container'
-    id='step_2_data'
-    ngModelGroup='step_2_data'>
+    id='step_2_data'>
     <div class='form-group'>
       <label for='companyName'>Company Name</label>
       <input
-        #companyName='ngModel'
         class='form-control'
+        formControlName='companyName'
         id='companyName'
         name='companyName'
-        ngModel
-        required
         type='text'>
-      <div *ngIf='showErrorHint(companyName)' class='help'>Required</div>
+      <div *ngIf='showErrorHint(form.controls.companyName)'>
+        <div *ngIf='form.controls.companyName.errors?.["required"]' class='help'>Required</div>
+      </div>
     </div>
     <div class='form-group'>
       <label for='domainName'>Domain Name</label>
       <input
         class='form-control'
+        formControlName='domainName'
         id='domainName'
         name='domainName'
-        ngModel
         type='text'>
     </div>
     <div class='form-group'>
       <label for='noOfEmp'>No. Of Employees</label>
       <input
-        #noOfEmp='ngModel'
-        [min]='1'
         class='form-control'
+        formControlName='noOfEmp'
         id='noOfEmp'
         name='noOfEmp'
-        ngModel
         required
         type='number'>
-      <div *ngIf='showErrorHint(noOfEmp)' class='help'>Required</div>
+      <div *ngIf='showErrorHint(form.controls.noOfEmp)'>
+        <div *ngIf='form.controls.noOfEmp.errors?.["required"]' class='help'>Required</div>
+      </div>
     </div>
   </div>
-  <app-controls (onNext)='onSubmitClicked()'
-                (onPrev)='prevBtnClicked()'
-                [disabledNextBtn]='!f.valid'
-                [showPrevBtn]='true'
-                nextLabel='Submit'
-  ></app-controls>
+  <app-form-buttons (onNext)='onSubmitClicked()'
+                    (onPrev)='prevBtnClicked()'
+                    [disabledNextBtn]='!form.valid'
+                    [showPrevBtn]='true'
+                    nextLabel='Submit'
+  ></app-form-buttons>
 
-  <!--  {{JSON.stringify(f.value)}}-->
 </form>

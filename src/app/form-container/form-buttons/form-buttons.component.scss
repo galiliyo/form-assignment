@@ -1,0 +1,14 @@
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+
+  button {
+    width: 6rem;
+
+    &.btn.btn-link {
+      color: #333;
+      text-decoration: none;
+    }
+  }
+}
