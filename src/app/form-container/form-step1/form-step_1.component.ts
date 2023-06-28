@@ -40,10 +40,10 @@ export class FormStep_1_Component implements OnInit {
   ngOnInit() {
     const formData = this.formDataService.getFormData()
     this.form.setValue({
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      age: formData.age ? String(formData.age) : "",
+      firstName: formData?.firstName || "",
+      lastName: formData?.lastName || "",
+      email: formData?.email || "",
+      age: formData?.age ? String(formData.age) : "",
     })
   }
 

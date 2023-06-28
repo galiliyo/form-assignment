@@ -20,7 +20,7 @@ export class FormStep_2_Component {
   form = this.fb.group({
     companyName: ["", Validators.required],
     domainName: [""],
-    noOfEmp: ["", [Validators.required, Validators.min(1)]],
+    noOfEmp: [""],
   })
 
   constructor(
@@ -31,21 +31,29 @@ export class FormStep_2_Component {
   ngOnInit() {
     const formData = this.formDataService.getFormData()
     this.form.setValue({
-      companyName: formData.companyName,
-      domainName: formData.domainName ? formData.domainName : "",
+      companyName: formData.companyName || "",
+      domainName: formData.domainName || "",
       noOfEmp: String(formData.noOfEmp),
     })
   }
 
-  onSubmitClicked() {
+  setData() {
     const { companyName, domainName, noOfEmp } = this.form.value
     this.step_2_data.companyName = String(companyName)
     this.step_2_data.domainName = String(domainName)
     this.step_2_data.noOfEmp = +String(noOfEmp)
+  }
+
+  onSubmitClicked() {
+    this.setData()
     this.onSubmit.emit(this.step_2_data)
   }
 
   prevBtnClicked() {
+    this.setData()
+    let formData = this.formDataService.getFormData()
+    formData = { ...formData, ...this.step_2_data }
+    localStorage.setItem("formData", JSON.stringify(formData))
     this.onPrev.emit()
   }
 

@@ -29,11 +29,12 @@
         class='form-control'
         formControlName='noOfEmp'
         id='noOfEmp'
+        min='0'
         name='noOfEmp'
         required
         type='number'>
       <div *ngIf='showErrorHint(form.controls.noOfEmp)'>
-        <div *ngIf='form.controls.noOfEmp.errors?.["required"]' class='help'>Required</div>
+        <div *ngIf='form.controls.noOfEmp.errors?.["min"]' class='help'>Required</div>
       </div>
     </div>
   </div>
