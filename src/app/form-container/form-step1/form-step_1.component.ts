@@ -31,11 +31,14 @@ export class FormStep_1_Component implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
+    console.log("ngAfterViewInit", this.formDataService.getFormData())
     setTimeout(() => {
       this.form_1.setValue({
         step_1_data: { ...this.formDataService.getFormData() },
       })
+      this.form_1.va
     }, 0)
+    // this.form_1.updateValueAndValidity()
   }
 
   nextBtnClicked() {

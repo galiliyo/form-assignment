@@ -9,10 +9,10 @@ export class FormDataServiceService {
     firstName: "",
     lastName: "",
     email: "",
-    age: 1,
+    age: undefined,
     companyName: "",
     domainName: "",
-    noOfEmp: 1,
+    noOfEmp: undefined,
   }
 
   getFormData() {

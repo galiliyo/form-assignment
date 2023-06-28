@@ -5,5 +5,5 @@ export interface IFormData {
   age: number | undefined
   companyName: string
   domainName?: string | undefined
-  noOfEmp: number
+  noOfEmp: number | undefined
 }
