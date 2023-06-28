@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from "@angular/core"
 import { NgForm, NgModel } from "@angular/forms"
+import { IFormData } from "../../interfaces/FormData.interface"
 
 @Component({
   selector: "app-form-step_1",
@@ -8,13 +9,13 @@ import { NgForm, NgModel } from "@angular/forms"
 })
 export class FormStep_1_Component {
   @ViewChild("f", { static: false }) form1: NgForm
-  @Output() onNext = new EventEmitter<number>()
+  @Output() onNext = new EventEmitter<Partial<IFormData>>()
 
   step_1_data = {
     firstName: "",
     lastName: "",
     email: "",
-    age: "",
+    age: 1,
   }
 
   allowedAge = { min: 18, max: 99 }
@@ -22,16 +23,13 @@ export class FormStep_1_Component {
   submitted = false
   protected readonly JSON = JSON
 
-  onSubmit() {
+  nextBtnClicked() {
     this.submitted = true
     this.step_1_data.firstName = this.form1.value.step_1_data.firstName
     this.step_1_data.lastName = this.form1.value.step_1_data.lastName
     this.step_1_data.email = this.form1.value.step_1_data.email
-    this.step_1_data.age = this.form1.value.step_1_data.age
-  }
-
-  nextBtnClicked() {
-    this.onNext.emit(2)
+    this.step_1_data.age = +this.form1.value.step_1_data.age
+    this.onNext.emit(this.step_1_data)
   }
 
   showErrorHint(ref: NgModel) {

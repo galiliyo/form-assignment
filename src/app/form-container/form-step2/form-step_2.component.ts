@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from "@angular/core"
 import { NgForm, NgModel } from "@angular/forms"
+import { IFormData } from "../../interfaces/FormData.interface"
 
 @Component({
   selector: "app-form-step_2",
@@ -8,29 +9,30 @@ import { NgForm, NgModel } from "@angular/forms"
 })
 export class FormStep_2_Component {
   @ViewChild("f", { static: false }) form2: NgForm
-  @Output() onNext = new EventEmitter<number>()
+  @Output() onSubmit = new EventEmitter<Partial<IFormData>>()
+  @Output() onPrev = new EventEmitter()
 
-  step_2_data = {
+  step_2_data: Partial<IFormData> = {
     companyName: "",
     domainName: "",
-    noOfEmp: "",
+    noOfEmp: 1,
   }
 
-  submitted = false
-  protected readonly JSON = JSON
-
-  onSubmit() {
-    this.submitted = true
+  submitForm() {
     this.step_2_data.companyName = this.form2.value.step_2_data.companyName
     this.step_2_data.domainName = this.form2.value.step_2_data.domainName
     this.step_2_data.noOfEmp = this.form2.value.step_2_data.noOfEmp
   }
 
-  nextBtnClicked() {
-    this.onNext.emit(2)
+  onSubmitClicked() {
+    this.onSubmit.emit(this.step_2_data)
   }
 
-  showErrorHint(ref: NgModel) {
-    return ref.invalid && (ref.dirty || ref.touched)
+  prevBtnClicked() {
+    this.onPrev.emit()
+  }
+
+  showErrorHint(model: NgModel) {
+    return model.invalid && (model.dirty || model.touched)
   }
 }

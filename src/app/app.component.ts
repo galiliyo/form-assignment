@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core"
+import { IFormData } from "./interfaces/FormData.interface"
 
 @Component({
   selector: "app-root",
@@ -15,5 +16,14 @@ export class AppComponent implements OnInit {
   goToStep(step: number) {
     console.log("step", step)
     this.stepNo = step
+  }
+
+  submitForm($event: Partial<IFormData>) {
+    console.log("submitForm", $event)
+  }
+
+  nextStep(stepFormData: Partial<IFormData>) {
+    console.log("nextStep", stepFormData)
+    this.stepNo++
   }
 }

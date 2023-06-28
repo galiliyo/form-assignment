@@ -3,8 +3,13 @@
                       [stepNo]='stepNo'>
 
     <div [ngSwitch]='stepNo'>
-      <app-form-step_1 (onNext)='goToStep($event)' *ngSwitchCase='1'></app-form-step_1>
-      <app-form-step_2 (onNext)='goToStep($event)' *ngSwitchCase='2'></app-form-step_2>
+      <app-form-step_1
+        (onNext)='nextStep($event)'
+        *ngSwitchCase='1'></app-form-step_1>
+      <app-form-step_2
+        (onPrev)='goToStep(1)'
+        (onSubmit)='submitForm($event)'
+        *ngSwitchCase='2'></app-form-step_2>
       <div *ngSwitchDefault>Some Error has occurred</div>
     </div>
   </app-form-container>

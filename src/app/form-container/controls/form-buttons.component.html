@@ -3,7 +3,8 @@
           *ngIf='showPrevBtn'
           class='btn btn-link'>Previous
   </button>
-  <button (click)='onNext.emit()'
+  <button (click)='null'
           [disabled]='disabledNextBtn'
-          class='btn btn-primary'>{{nextLabel}}</button>
+          class='btn btn-primary'
+          type='submit'>{{nextLabel}}</button>
 </div>
