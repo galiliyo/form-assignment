@@ -1,65 +1,79 @@
-<form (ngSubmit)='nextBtnClicked()' [formGroup]='form'>
-  <div
-    class='form-container'
-    id='step_1_data'>
-    <div class='form-group'>
-      <label for='firstName'>First Name</label>
+<form (ngSubmit)="nextBtnClicked()" [formGroup]="form">
+  <div class="form-container" id="step_1_data">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
       <input
-        class='form-control'
-        formControlName='firstName'
-        id='firstName'
-        name='firstName'
-        type='text'>
-      <div *ngIf='showErrorHint(form.controls.firstName)'>
-        <div *ngIf='form.controls.firstName.errors?.["required"]' class='help'>Required</div>
+        class="form-control"
+        formControlName="firstName"
+        id="firstName"
+        name="firstName"
+        type="text"
+      />
+      <div *ngIf="showErrorHint(form.controls.firstName)">
+        <div *ngIf='form.controls.firstName.errors?.["required"]' class="help">
+          Required
+        </div>
       </div>
     </div>
-    <div class='form-group'>
-      <label for='lastName'>Last Name</label>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
       <input
-        class='form-control'
-        formControlName='lastName'
-        id='lastName'
-        name='lastName'
-        type='text'>
-      <div
-        *ngIf='showErrorHint(form.controls.lastName)'>
-        <div *ngIf='form.controls.lastName.errors?.["required"]' class='help'>Required</div>
+        class="form-control"
+        formControlName="lastName"
+        id="lastName"
+        name="lastName"
+        type="text"
+      />
+      <div *ngIf="showErrorHint(form.controls.lastName)">
+        <div *ngIf='form.controls.lastName.errors?.["required"]' class="help">
+          Required
+        </div>
       </div>
     </div>
-    <div class='form-group'>
-      <label for='email'>Email</label>
+    <div class="form-group">
+      <label for="email">Email</label>
       <input
-        class='form-control'
-        formControlName='email'
-        id='email'
-        name='email'
-        type='email'>
-      <div
-        *ngIf='showErrorHint(form.controls.email)'>
-        <div *ngIf='form.controls.email.errors?.["required"]' class='help'>Required</div>
-        <div *ngIf='form.controls.email.errors?.["email"]' class='help'>Invalid Email</div>
+        class="form-control"
+        formControlName="email"
+        id="email"
+        name="email"
+        type="email"
+      />
+      <div *ngIf="showErrorHint(form.controls.email)">
+        <div *ngIf='form.controls.email.errors?.["required"]' class="help">
+          Required
+        </div>
+        <div *ngIf='form.controls.email.errors?.["email"]' class="help">
+          Invalid Email
+        </div>
       </div>
     </div>
-    <div class='form-group'>
-      <label for='age'>Age</label>
+    <div class="form-group">
+      <label for="age">Age</label>
       <input
-        class='form-control'
-        formControlName='age'
-        id='age'
-        min='1'
-        name='age'
-        type='number'>
-      <div
-        *ngIf='showErrorHint(form.controls.age)'>
-        <div *ngIf='form.controls.age.errors?.["required"]' class='help'>Required</div>
-        <div *ngIf='form.controls.age.errors?.["min"]' class='help'>Min. age is {{allowedAge.min}}</div>
-        <div *ngIf='form.controls.age.errors?.["max"]' class='help'>Max. age is {{allowedAge.max}}</div>
+        class="form-control"
+        formControlName="age"
+        id="age"
+        min="1"
+        name="age"
+        type="number"
+      />
+      <div *ngIf="showErrorHint(form.controls.age)">
+        <div *ngIf='form.controls.age.errors?.["required"]' class="help">
+          Required
+        </div>
+        <div *ngIf='form.controls.age.errors?.["min"]' class="help">
+          Min. age is {{ allowedAge.min }}
+        </div>
+        <div *ngIf='form.controls.age.errors?.["max"]' class="help">
+          Max. age is {{ allowedAge.max }}
+        </div>
       </div>
     </div>
   </div>
-  <app-form-buttons (onNext)='nextBtnClicked()'
-                    [disabledNextBtn]='!form.valid'
-                    nextLabel='Next'></app-form-buttons>
-
+  <app-form-buttons
+    (onNext)="nextBtnClicked()"
+    [disabledNextBtn]="!form.valid"
+    nextLabel="Next"
+  ></app-form-buttons>
 </form>

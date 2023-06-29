@@ -46,13 +46,15 @@ export class FormStep_1_Component implements OnInit {
       age: formData?.age ? String(formData.age) : "",
     })
   }
-
-  nextBtnClicked() {
+  private updateStep_1_data() {
     const { firstName, lastName, age, email } = this.form.value
     this.step_1_data.firstName = String(firstName)
     this.step_1_data.lastName = String(lastName)
     this.step_1_data.email = String(email)
     this.step_1_data.age = +String(age)
+  }
+  nextBtnClicked() {
+    this.updateStep_1_data()
     this.onNext.emit(this.step_1_data)
   }
 

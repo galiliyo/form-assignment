@@ -11,4 +11,6 @@ export class FormButtonsComponent {
   @Input() showPrevBtn?: boolean
   @Output() onNext = new EventEmitter()
   @Output() onPrev = new EventEmitter()
+
+  resetForm() {}
 }

@@ -1,12 +1,8 @@
-<div class='controls'>
-
-  <button (click)='onPrev.emit()'
-          *ngIf='showPrevBtn'
-          class='btn btn-link'>Previous
+<div class="controls">
+  <button (click)="onPrev.emit()" *ngIf="showPrevBtn" class="btn btn-link">
+    Previous
   </button>
-  <button
-    [disabled]='disabledNextBtn'
-    class='btn btn-primary'
-    type='submit'>{{nextLabel}}</button>
-
+  <button [disabled]="disabledNextBtn" class="btn btn-primary" type="submit">
+    {{ nextLabel }}
+  </button>
 </div>

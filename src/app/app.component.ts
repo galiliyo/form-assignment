@@ -43,9 +43,6 @@ export class AppComponent implements OnInit {
   }
 
   prevStep() {
-    if (this.stepNo === 1) {
-      return
-    }
     this.stepNo--
   }
 }

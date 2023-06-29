@@ -33,11 +33,11 @@ export class FormStep_2_Component {
     this.form.setValue({
       companyName: formData.companyName || "",
       domainName: formData.domainName || "",
-      noOfEmp: String(formData.noOfEmp),
+      noOfEmp: String(formData.noOfEmp) || "",
     })
   }
 
-  setData() {
+  private updateStep2Data() {
     const { companyName, domainName, noOfEmp } = this.form.value
     this.step_2_data.companyName = String(companyName)
     this.step_2_data.domainName = String(domainName)
@@ -45,14 +45,16 @@ export class FormStep_2_Component {
   }
 
   onSubmitClicked() {
-    this.setData()
+    this.updateStep2Data()
     this.onSubmit.emit(this.step_2_data)
   }
 
   prevBtnClicked() {
-    this.setData()
+    this.updateStep2Data()
     let formData = this.formDataService.getFormData()
-    formData = { ...formData, ...this.step_2_data }
+    formData.companyName = this.step_2_data.companyName || ""
+    formData.domainName = this.step_2_data.domainName
+    formData.noOfEmp = this.step_2_data.noOfEmp || null
     localStorage.setItem("formData", JSON.stringify(formData))
     this.onPrev.emit()
   }

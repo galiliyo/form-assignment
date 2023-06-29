@@ -1,5 +1,12 @@
 import { Injectable, OnInit } from "@angular/core"
 import { IFormData } from "../interfaces/FormData.interface"
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  ɵElement,
+} from "@angular/forms"
 
 @Injectable({
   providedIn: "root",
@@ -30,7 +37,9 @@ export class FormDataService implements OnInit {
     this._formData = { ...this._formData, ...formData }
   }
 
-  resetFormData() {
+  resetFormData(form: FormGroup<any>) {
     this._formData = this.emptyFormData
+    form.reset()
+    localStorage.removeItem("formData")
   }
 }
